@@ -10,19 +10,23 @@
     "checkAll": "npm run lint && npm run check",
     "lint": "eslint '*/**/*.{js,ts,tsx}'",
     "lint:fix": "eslint '*/**/*.{js,ts,tsx}' --fix",
+    "prestart": "npm run build",
     "start": "node ./dist/index.js",
+    "start:no-build": "node ./dist/index.js",
     "test": "./node_modules/jest/bin/jest.js"
   },
   "license": "BSD-2-Clause",
   "dependencies": {
     "bluebird": "^3.4.1",
     "Faker": "~0.7.0",
+    "heap": "^0.2.7",
     "jest": "^26.6.3",
     "lodash": "^4.13.1"
   },
   "devDependencies": {
     "@types/bluebird": "^3.5.36",
     "@types/faker": "^6.6.9",
+    "@types/heap": "^0.2.29",
     "@types/jest": "^27.4.1",
     "@types/lodash": "^4.14.181",
     "@typescript-eslint/eslint-plugin": "^5.17.0",

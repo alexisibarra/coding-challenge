@@ -1,8 +1,12 @@
-"use strict";
+import * as _ from "lodash";
+import P = require("bluebird");
 
-const _ = require("lodash");
-const Faker = require("Faker");
-const P = require("bluebird");
+import Faker = require("Faker");
+
+export interface ILogEntry {
+  date: Date;
+  msg: string;
+}
 
 /*
     We don't like OOP - in fact - we despise it!
@@ -11,13 +15,20 @@ const P = require("bluebird");
     will be in OO form - therefore - we simulate that interaction here.
 */
 
-module.exports = class LogSource {
+class LogSource {
+  drained: boolean;
+
+  last: ILogEntry;
+
+  count: number;
+
   constructor() {
     this.drained = false;
     this.last = {
       date: new Date(Date.now() - 1000 * 60 * 60 * 24 * _.random(40, 60)),
       msg: Faker.Company.catchPhrase(),
     };
+    this.count = 1;
   }
 
   getNextPseudoRandomEntry() {
@@ -33,17 +44,27 @@ module.exports = class LogSource {
 
   pop() {
     this.last = this.getNextPseudoRandomEntry();
+
     if (this.last.date > new Date()) {
       this.drained = true;
     }
+
+    if (!this.drained) {
+      this.count += 1;
+    }
+
     return this.drained ? false : this.last;
   }
 
   popAsync() {
     this.last = this.getNextPseudoRandomEntry();
-    if (this.last.date > Date.now()) {
+
+    if (this.last.date.getTime() > Date.now()) {
       this.drained = true;
     }
+
     return P.delay(_.random(8)).then(() => (this.drained ? false : this.last));
   }
-};
+}
+
+export default LogSource;

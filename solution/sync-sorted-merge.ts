@@ -9,6 +9,10 @@ import { compareLogSourcesDates } from "../lib/compareLogSourcesDates";
 type TSyncSortedMerge = (logSources: LogSource[], printer: Printer) => void;
 
 const syncSortedMerge: TSyncSortedMerge = (logSources, printer) => {
+  if (logSources.length === 0) {
+    throw new Error("logSources array must have at least one element");
+  }
+
   const heap: Heap<LogSource> = new Heap(compareLogSourcesDates);
 
   logSources.forEach((logSource) => {

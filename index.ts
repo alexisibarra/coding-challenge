@@ -57,4 +57,4 @@ const runSolutions = async (sourceCount: number) => {
   });
 };
 
-runSolutions(500);
+runSolutions(100);

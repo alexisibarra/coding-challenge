@@ -1,5 +1,3 @@
-"use strict";
-
 import { getLogSources } from "./lib/getLogSources";
 import Printer from "./lib/printer";
 import asyncSortedMerge from "./solution/async-sorted-merge";
@@ -37,7 +35,7 @@ const runSolutions = async (sourceCount: number) => {
     }
   });
 
-  return await new Promise((resolve_1, reject_1) => {
+  return new Promise((resolve_1, reject_1) => {
     /**
      * Challenge Number 2!
      *
@@ -53,9 +51,9 @@ const runSolutions = async (sourceCount: number) => {
      */
     const asyncLogSources = getLogSources(sourceCount);
 
-    // asyncSortedMerge(asyncLogSources, new Printer())
-    //   .then(resolve_1)
-    //   .catch(reject_1);
+    asyncSortedMerge(asyncLogSources, new Printer())
+      .then(resolve_1)
+      .catch(reject_1);
   });
 };
 

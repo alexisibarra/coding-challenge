@@ -1,0 +1,72 @@
+{
+  "env": {
+    "browser": true,
+    "jest": true,
+    "es6": true
+  },
+  "extends": [
+    "plugin:@typescript-eslint/recommended",
+    "airbnb",
+    "prettier"
+  ],
+  "globals": {
+    "Atomics": "readonly",
+    "SharedArrayBuffer": "readonly"
+  },
+  "parser": "@typescript-eslint/parser",
+  "parserOptions": {
+    "project": "./tsconfig.json"
+  },
+  "plugins": [
+    "@typescript-eslint",
+    "prettier",
+    "promise"
+  ],
+  "rules": {
+    "no-unused-vars": "off",
+    "@typescript-eslint/no-unused-vars": "error",
+    "import/prefer-default-export": "off",
+    "camelcase": "off",
+    "no-nested-ternary": "off",
+    "consistent-return": "warn",
+    "no-shadow": "warn",
+    "import/no-unresolved": "warn",
+    "no-use-before-define": "off",
+    "no-unneeded-ternary": "warn",
+    "indent": "warn",
+    "no-param-reassign": [
+      "error",
+      {
+        "props": true,
+        "ignorePropertyModificationsFor": [
+          "state"
+        ]
+      }
+    ],
+    "arrow-body-style": "warn",
+    "no-multiple-empty-lines": "warn",
+    "import/extensions": "off",
+    "operator-linebreak": "off",
+    "no-console": "off",
+    "no-await-in-loop": "off"
+  },
+  "ignorePatterns": [
+    ".eslintrc.js",
+    ".eslintrc.json",
+    "cypress/plugins/index.ts"
+  ],
+  "settings": {
+    "import/resolver": {
+      "node": {
+        "paths": [
+          "src"
+        ],
+        "extensions": [
+          ".js",
+          ".ts",
+          ".tsx"
+        ]
+      }
+    }
+  }
+}

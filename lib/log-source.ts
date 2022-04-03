@@ -20,12 +20,15 @@ class LogSource {
 
   last: ILogEntry;
 
+  count: number;
+
   constructor() {
     this.drained = false;
     this.last = {
       date: new Date(Date.now() - 1000 * 60 * 60 * 24 * _.random(40, 60)),
       msg: Faker.Company.catchPhrase(),
     };
+    this.count = 1;
   }
 
   getNextPseudoRandomEntry() {
@@ -44,6 +47,10 @@ class LogSource {
 
     if (this.last.date > new Date()) {
       this.drained = true;
+    }
+
+    if (!this.drained) {
+      this.count += 1;
     }
 
     return this.drained ? false : this.last;
